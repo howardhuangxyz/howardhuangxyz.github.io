@@ -28,9 +28,12 @@ planeObject.rotation.x = -Math.PI / 2;
 planeObject.receiveShadow = true;
 scene.add( planeObject );
 
+const loader = new THREE.TextureLoader();
+
 const cubeGeometry = new THREE.BoxGeometry( .99, .99, .99 );
-const material = new THREE.MeshStandardMaterial( { color: 0xffffff} );
-const cubeObject = new THREE.Mesh( cubeGeometry, material );
+const material = new THREE.MeshPhongMaterial({
+    map:loader.load('https://threejsfundamentals.org/threejs/lessons/resources/images/compressed-but-large-wood-texture.jpg')
+});
 
 var cubeArr = [];
 
@@ -118,24 +121,24 @@ function scrollCamera() {
         camera.position.set( -4.8, 7.5, 6.4);
         camera.lookAt(0, 2, 0);
     }
+    topLight.position.set(
+        10 + .5 * camera.position.x,
+        10 + .5 * camera.position.y,
+        20 + .5 * camera.position.z
+    );
 }
 
+cubeArr[1][0][0].position.set(10, 10, 10);
 
-
-
+const controls = new OrbitControls( camera, renderer.domElement );
+const axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
 
 function animate() {
     requestAnimationFrame( animate );
 
-
-    topLight.position.set(
-        10 + .1 * camera.position.x,
-        10 + .1 * camera.position.y,
-        20 + .1 * camera.position.z
-    );
-
-    scrollCamera();
-
+    //scrollCamera();
+    controls.update();
 
     renderer.render( scene, camera );
 }
