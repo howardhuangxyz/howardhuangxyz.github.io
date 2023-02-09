@@ -37,3 +37,16 @@ Final = Initial
     camera.position.set( -4.8, 7.5, 6.4);
     camera.lookAt(0, 2, 0);
 
+
+When Left, break apart in positive Z
+
+When right, break apart in negative X
+
+27 total, break off 19 - 10 in first, 9 in second??
+
+leave 8
+
+for final animation
+//todo
+
+expand boxes 

@@ -30,10 +30,16 @@ scene.add( planeObject );
 
 const loader = new THREE.TextureLoader();
 
-const cubeGeometry = new THREE.BoxGeometry( .99, .99, .99 );
-const material = new THREE.MeshPhongMaterial({
-    map:loader.load('https://threejsfundamentals.org/threejs/lessons/resources/images/compressed-but-large-wood-texture.jpg')
-});
+const cubeGeometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+const material = [];
+
+const colorArray = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"];
+
+for (let index = 0; index < 27; index++) {
+    material[index] = new THREE.MeshLambertMaterial({color: colorArray[index % 12], map:loader.load('./textures/matte2.jpg')});
+}
+
 
 var cubeArr = [];
 
@@ -42,7 +48,7 @@ for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
         cubeArr[i][j] = [];
         for (let k = 0; k < 3; k++) {
-            cubeArr[i][j][k] = new THREE.Mesh( cubeGeometry, material );
+            cubeArr[i][j][k] = new THREE.Mesh( cubeGeometry, material[i*9 + j*3 + k] );
             cubeArr[i][j][k].position.set(i - 1, j + 0.5, k - 1);
             cubeArr[i][j][k].castShadow = true;
             scene.add(cubeArr[i][j][k]);
@@ -64,29 +70,18 @@ topLight.shadow.camera.near = 0.1;
 topLight.shadow.camera.far = 40;
 scene.add( topLight);
 
-const lightHelper = new THREE.SpotLightHelper( topLight, 1 );
-scene.add( lightHelper );
-
-
-
-const gridHelper = new THREE.GridHelper( 10, 10 );
-scene.add( gridHelper );
-const k = 3.5;
-
 camera.position.set( -4.8, 7.5, 6.4);
 camera.lookAt(0, 2, 0);
 
 
-let scrollY = 0;
+let scrollY = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+let fps = 0;
 const progressSpan = document.querySelector('#scrollProgress');
 
 window.addEventListener('scroll', () =>
 {
-    scrollY = window.scrollY / 25.31;
-    progressSpan.innerHTML = "Scroll Percentage: " + Math.trunc(scrollY * 100) / 100 + "%";
-
-    console.log(scrollY);
-    console.log(camera.position);
+    scrollY = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    progressSpan.innerHTML = "Scroll Percentage: " + scrollY.toFixed(2).padStart(5, '0') + "%" + " FPS: " + fps;
 })
 
 window.addEventListener( 'resize', onWindowResize, false );
@@ -98,27 +93,32 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+function easeInOutSin(input) {
+    return .5*(Math.sin((input - .5)*Math.PI) + 1);
+}
+
 function scrollCamera() {
     if (scrollY < 15) { // initial position
         camera.position.set( -4.8, 7.5, 6.4);
         camera.lookAt(0, 2, 0);
     } else if (scrollY < 25) { // shift to left
-        camera.position.set( -4.8 - 4.1 * ((scrollY - 15) / 10 ), 7.5, 6.4 + 0.7 * ((scrollY - 15) / 10 ));
-        camera.lookAt(1.2 * ((scrollY - 15) / 10 ), 2, 3.8 * ((scrollY - 15) / 10 ));
+        camera.position.set( -4.8 - 4.1 * easeInOutSin((scrollY - 15) / 10 ), 7.5, 6.4 + 0.7 * easeInOutSin((scrollY - 15) / 10 ));
+        camera.lookAt(1.2 * easeInOutSin((scrollY - 15) / 10 ), 2, 3.8 * easeInOutSin((scrollY - 15) / 10 ));
     } else if (scrollY < 40) { // hold still
         camera.position.set(-8.9, 7.5, 7.1);
         camera.lookAt(1.2, 2, 3.8);
     } else if (scrollY < 50) { // shift to right
-        camera.position.set(-8.9 + 3.8 * ((scrollY - 40) / 10 ), 7.5, 7.1 - 1.1 * ((scrollY - 40) / 10 ));
-        camera.lookAt(1.2 - 4.0 * ((scrollY - 40) / 10 ), 2, 3.8 - 4.7 * ((scrollY - 40) / 10 ));
+        camera.position.set(-8.9 + 3.8 * easeInOutSin((scrollY - 40) / 10 ), 7.5, 7.1 - 1.1 * easeInOutSin((scrollY - 40) / 10 ));
+        camera.lookAt(1.2 - 4.0 * easeInOutSin((scrollY - 40) / 10 ), 2, 3.8 - 4.7 * easeInOutSin((scrollY - 40) / 10 ));
     } else if (scrollY < 65) { // hold still
         camera.position.set(-5.1, 7.5, 6.0);
         camera.lookAt(-2.8, 2, -0.9);
     } else if (scrollY < 75) { // shift back to middle
-        camera.position.set(-5.1 + 0.3 * ((scrollY - 65) / 10 ), 7.5, 6.0 + 0.4 * ((scrollY - 65) / 10 ));
-        camera.lookAt(-2.8 + 2.8 * ((scrollY - 65) / 10 ), 2, -0.9 + 0.9 * ((scrollY - 65) / 10 ));
-    } else { //hold still at initial position
-        camera.position.set( -4.8, 7.5, 6.4);
+        camera.position.set(-5.1 + 0.3 * easeInOutSin((scrollY - 65) / 10 ), 7.5, 6.0 + 0.4 * easeInOutSin((scrollY - 65) / 10 ));
+        camera.lookAt(-2.8 + 2.8 * easeInOutSin((scrollY - 65) / 10 ), 2, -0.9 + 0.9 * easeInOutSin((scrollY - 65) / 10 ));
+    } else if (scrollY <= 100){ //zoom to 0.5
+        let k = 1 - 0.5 * easeInOutSin((scrollY - 75) / 25 ); // 1->0.5
+        camera.position.set( -4.8 * k, (7.5 - 2) * k + 2, 6.4 * k);
         camera.lookAt(0, 2, 0);
     }
     topLight.position.set(
@@ -128,19 +128,95 @@ function scrollCamera() {
     );
 }
 
-cubeArr[1][0][0].position.set(10, 10, 10);
+function moveLeftCube(i, j, k, time, total) {
+    if (time > total) {
+        cubeArr[i][j][k].position.set(i - 1, j + 0.5, k - 1 + 10);
+    }
+    if (time > 0) {
+        cubeArr[i][j][k].position.set(i - 1, j + 0.5, k - 1 + 10 * ((time / total) ** 3));
+    } else {
+        cubeArr[i][j][k].position.set(i - 1, j + 0.5, k - 1);
+    }
+}
 
-const controls = new OrbitControls( camera, renderer.domElement );
+function moveRightCube(i, j, k, time, total) {
+    if (time > total) {
+        cubeArr[i][j][k].position.set(i - 1 - 10, j + 0.5, k - 1);
+    }
+    if (time > 0) {
+        cubeArr[i][j][k].position.set(i - 1 - 10 * ((time / total) ** 3), j + 0.5, k - 1);
+    } else {
+        cubeArr[i][j][k].position.set(i - 1, j + 0.5, k - 1);
+    }
+}
+
+function moveLeftCubes(time) {
+    moveLeftCube(0, 2, 2, time - 3, 60);
+    moveLeftCube(0, 1, 2, time - 7, 57);
+    moveLeftCube(0, 2, 1, time - 11, 53);
+    moveLeftCube(1, 2, 2, time - 15, 51);
+    moveLeftCube(0, 0, 2, time - 19, 53);
+    moveLeftCube(1, 2, 1, time - 23, 57);
+    moveLeftCube(1, 1, 2, time - 27, 59);
+    moveLeftCube(2, 2, 2, time - 31, 56);
+    moveLeftCube(2, 1, 2, time - 35, 54);
+    moveLeftCube(0, 2, 0, time - 39, 57);
+}
+
+function moveRightCubes(time) {
+    moveRightCube(0, 1, 1, time - 3, 60);
+    moveRightCube(1, 2, 0, time - 7, 57);
+    moveRightCube(1, 0, 2, time - 11, 53);
+    moveRightCube(0, 1, 0, time - 15, 51);
+    moveRightCube(2, 2, 1, time - 19, 53);
+    moveRightCube(2, 0, 2, time - 23, 57);
+    moveRightCube(0, 0, 1, time - 27, 59);
+    moveRightCube(2, 2, 0, time - 31, 56);
+    moveRightCube(0 ,0, 0, time - 35, 54);
+}
+
+function handleCubeMovement() {
+    moveLeftCubes((scrollY - 25) / 15 * 100);
+    moveRightCubes((scrollY - 50) / 15 * 100);
+}
+
+//const controls = new OrbitControls( camera, renderer.domElement );
+/*
+const lightHelper = new THREE.SpotLightHelper( topLight, 1 );
+scene.add( lightHelper );
+
+const gridHelper = new THREE.GridHelper( 10, 10 );
+scene.add( gridHelper );
+
 const axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
+scene.add( axesHelper );*/
+
+let frame = 0;
+let frameAtLastSecond = 0;
+let timeAtLastSecond = Date.now();
+function printAnalytics() {
+    console.log("Frame: " + frame + " FPS: " + fps + " ScrollY: " + scrollY);
+    frame++;
+    if (Date.now() - timeAtLastSecond > 1000) {
+        fps = frame - frameAtLastSecond;
+        frameAtLastSecond = frame;
+        timeAtLastSecond = Date.now();
+    }
+}
 
 function animate() {
     requestAnimationFrame( animate );
 
-    //scrollCamera();
-    controls.update();
+    scrollCamera();
+    handleCubeMovement();
+    
 
+    //controls.update();
+    
     renderer.render( scene, camera );
+    printAnalytics();
 }
 
+scrollCamera();
+handleCubeMovement();
 animate();

@@ -10,7 +10,14 @@ div {
     font-size: 2rem;
     border-color: #fff;
     border-style: solid;
-    display: none;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin-top: 20px;
+    margin-left: 20px;
+
 }
 
 .page {
