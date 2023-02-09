@@ -4,3 +4,23 @@
     left: 0;
     z-index: -1;
 }
+
+div {
+    color: #fff;
+    font-size: 2rem;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.page {
+    height: 100vh;
+}
+
+#scrollProgress {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 99;
+    font-size: 3vh;
+    color: #fff;
+}

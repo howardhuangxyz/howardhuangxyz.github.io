@@ -7,10 +7,33 @@ https://domains.google.com/registrar/search?authuser=2&searchTerm=howardhuang.xy
 
 ### Home
 
-scrolling opens like an envelope??
+Text scrolls in from left and right
 
-### Selected Work
 
-### Resume
+background starts as a cube, but starts breaking into a 3x3x3 which slowly moves outwards on straight trajectories
 
-### Contact
+
+Camera breakpoints
+
+Initial 
+    camera.position.set( -4.8, 7.5, 6.4);
+    camera.lookAt(0, 2, 0);
+
+ease towards
+
+Left position
+    camera.position.set(-8.9, 7.5, 7.1);
+    camera.lookAt(1.2, 2, 3.8);
+
+ease towards
+
+Right position
+    camera.position.set(-5.1, 7.5, 6.0);
+    camera.lookAt(-2.8, 2, -0.9);
+
+ease towards final position
+
+Final = Initial
+    camera.position.set( -4.8, 7.5, 6.4);
+    camera.lookAt(0, 2, 0);
+
