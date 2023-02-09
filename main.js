@@ -59,8 +59,10 @@ for (let i = 0; i < 3; i++) {
 const ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( ambientLight );
 
-const topLight = new THREE.SpotLight( 0xffffff, 1);
+const topLight = new THREE.SpotLight( 0xffffff, 3);
 topLight.position.set( 3, 7, -3 );
+topLight.lookAt(0, 2, 0);
+topLight.decay = 2;
 topLight.castShadow = true;
 topLight.shadow.camera.top = 1;
 topLight.shadow.camera.bottom = -2;
@@ -74,6 +76,8 @@ camera.position.set( -4.8, 7.5, 6.4);
 camera.lookAt(0, 2, 0);
 
 
+
+
 let scrollY = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
 let fps = 0;
 const progressSpan = document.querySelector('#scrollProgress');
@@ -82,7 +86,51 @@ window.addEventListener('scroll', () =>
 {
     scrollY = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
     progressSpan.innerHTML = "Scroll Percentage: " + scrollY.toFixed(2).padStart(5, '0') + "%" + " FPS: " + fps;
+    handleScrollElements();
 })
+
+var nameslide = document.getElementById("nameslide");
+var name = document.getElementById("name");
+var logos = document.getElementsByClassName("logo");
+var arrows = document.getElementsByClassName("arrows");
+function handleScrollElements() {
+    if (scrollY > 7) {
+        for (var x = 0; x < arrows.length; x++) {
+            arrows[x].style.visibility = "hidden";
+        }
+    } else {
+        for (var x = 0; x < arrows.length; x++) {
+            arrows[x].style.visibility = "visible";
+        }
+    }
+    if (scrollY < 6) {
+        for (var x = 0; x < logos.length; x++) {
+            logos[x].style.opacity = 1;
+        }
+        nameslide.style.width = "44%";
+        nameslide.style.marginLeft = "-22%";
+        nameslide.style.left = "50%";
+        nameslide.style.top = "20%";
+        nameslide.style.backgroundColor = "#232323ab";
+        name.style.fontSize = "4rem";
+        name.style.marginTop = "20px";
+    } else if (scrollY < 12) {
+        for (var x = 0; x < logos.length; x++) {
+            logos[x].style.opacity = 1 - (scrollY - 6) / 6;
+        }
+    } else {
+        for (var x = 0; x < logos.length; x++) {
+            logos[x].style.opacity = 0;
+        }
+        nameslide.style.width = "10%";
+        nameslide.style.marginLeft = "0%";
+        nameslide.style.left = "0%";
+        nameslide.style.top = "0%";
+        nameslide.style.backgroundColor = "#23232300";
+        name.style.fontSize = "3rem";
+        name.style.marginTop = "10px";
+    }
+}
 
 window.addEventListener( 'resize', onWindowResize, false );
 
@@ -195,7 +243,7 @@ let frame = 0;
 let frameAtLastSecond = 0;
 let timeAtLastSecond = Date.now();
 function printAnalytics() {
-    console.log("Frame: " + frame + " FPS: " + fps + " ScrollY: " + scrollY);
+    //console.log("Frame: " + frame + " FPS: " + fps + " ScrollY: " + scrollY);
     frame++;
     if (Date.now() - timeAtLastSecond > 1000) {
         fps = frame - frameAtLastSecond;
@@ -219,4 +267,5 @@ function animate() {
 
 scrollCamera();
 handleCubeMovement();
+handleScrollElements();
 animate();

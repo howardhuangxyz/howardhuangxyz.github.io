@@ -5,13 +5,6 @@
     z-index: -1;
 }
 
-div {
-    color: #fff;
-    font-size: 2rem;
-    border-color: #fff;
-    border-style: solid;
-}
-
 h1 {
     color: #fff;
     font-size: 2rem;
@@ -22,6 +15,10 @@ h1 {
 
 .page {
     height: 100vh;
+    color: #fff;
+    font-size: 2rem;
+    border-color: #fff;
+    border-style: solid;
 }
 
 #scrollProgress {
@@ -31,4 +28,94 @@ h1 {
     z-index: 99;
     font-size: 3vh;
     color: #fff;
+}
+
+.slide {
+    position: fixed;
+    top: 0;
+    background-color: #232323ab;
+    color: #fff;
+    text-align: center;
+}
+
+#nameslide {
+    width: 44%;
+    margin-left: -22%;
+    left: 50%;
+    top: 20%;
+}
+
+#name {
+    font-size: 4rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logo-holder {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 20px;
+    margin: 10px;
+    filter: invert(100%);
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.arrows {
+	width: 60px;
+	height: 72px;
+	position: absolute;
+	left: 50%;
+	margin-left: -30px;
+	bottom: 20px;
+    visibility: visible;
+}
+
+.arrows path {
+	stroke: #fff;
+	fill: transparent;
+	stroke-width: 1px;	
+	animation: arrow 2s infinite;
+	-webkit-animation: arrow 2s infinite; 
+}
+
+@keyframes arrow
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/
+{
+0% {opacity:0}
+40% {opacity:1}
+80% {opacity:0}
+100% {opacity:0}
+}
+
+.arrows path.a1 {
+	animation-delay:-1s;
+	-webkit-animation-delay:-1s; /* Safari 和 Chrome */
+}
+
+.arrows path.a2 {
+	animation-delay:-0.5s;
+	-webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
+}
+
+.arrows path.a3 {	
+	animation-delay:0s;
+	-webkit-animation-delay:0s; /* Safari 和 Chrome */
 }
