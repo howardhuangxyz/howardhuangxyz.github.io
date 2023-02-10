@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+
+.hide {
+    visibility: hidden;
+}
+
 #canvas {
     position: fixed;
     top: 0;
@@ -10,7 +16,6 @@ h1 {
     font-size: 2rem;
     margin-top: 20px;
     margin-left: 20px;
-
 }
 
 .page {
@@ -32,26 +37,32 @@ h1 {
 
 .slide {
     position: fixed;
-    top: 0;
-    background-color: #232323ab;
     color: #fff;
-    text-align: center;
+    font-family: 'Exo 2';
 }
 
 #nameslide {
-    width: 44%;
-    margin-left: -22%;
+    width: 66%;
+    margin-left: -33%;
     left: 50%;
     top: 20%;
+    background-color: rgba(35, 35, 35, 0.67);
+    text-align: center;
 }
 
 #name {
-    font-size: 4rem;
+    font-size: 7vw;
     margin-top: 20px;
     margin-bottom: 20px;
-    white-space: nowrap;
     margin-left: 20px;
     margin-right: 20px;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 600px) {
+    #name {
+        white-space: normal;
+    }
 }
 
 .logo-holder {
@@ -72,50 +83,150 @@ h1 {
 }
 
 .arrows {
-	width: 60px;
-	height: 72px;
-	position: absolute;
-	left: 50%;
-	margin-left: -30px;
-	bottom: 20px;
+    width: 60px;
+    height: 72px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    bottom: 20px;
     visibility: visible;
 }
 
 .arrows path {
-	stroke: #fff;
-	fill: transparent;
-	stroke-width: 1px;	
-	animation: arrow 2s infinite;
-	-webkit-animation: arrow 2s infinite; 
+    stroke: #fff;
+    fill: transparent;
+    stroke-width: 1px;
+    animation: arrow 2s infinite;
+    -webkit-animation: arrow 2s infinite;
 }
 
-@keyframes arrow
-{
-0% {opacity:0}
-40% {opacity:1}
-80% {opacity:0}
-100% {opacity:0}
+@keyframes arrow {
+    0% {
+        opacity: 0
+    }
+
+    40% {
+        opacity: 1
+    }
+
+    80% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 0
+    }
 }
 
-@-webkit-keyframes arrow /*Safari and Chrome*/
-{
-0% {opacity:0}
-40% {opacity:1}
-80% {opacity:0}
-100% {opacity:0}
+@-webkit-keyframes arrow {
+    0% {
+        opacity: 0
+    }
+
+    40% {
+        opacity: 1
+    }
+
+    80% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 0
+    }
 }
 
 .arrows path.a1 {
-	animation-delay:-1s;
-	-webkit-animation-delay:-1s; /* Safari 和 Chrome */
+    animation-delay: -1s;
+    -webkit-animation-delay: -1s;
 }
 
 .arrows path.a2 {
-	animation-delay:-0.5s;
-	-webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
+    animation-delay: -0.5s;
+    -webkit-animation-delay: -0.5s;
 }
 
-.arrows path.a3 {	
-	animation-delay:0s;
-	-webkit-animation-delay:0s; /* Safari 和 Chrome */
+.arrows path.a3 {
+    animation-delay: 0s;
+    -webkit-animation-delay: 0s;
+}
+
+#rightslide {
+    width: 80%;
+    right: -40%;
+    top: 10%;
+    background-color: rgba(35, 35, 35, 0);
+    text-align: left;
+}
+
+.heading {
+    font-size: 3vw;
+    font-weight: 600;
+    padding: 10px;
+    padding-bottom: 3px;
+    background-color: rgba(35, 35, 35, .67);
+    width: 50%;
+}
+
+.subheading {
+    font-size: 1.5vw;
+    padding: 10px;
+    background-color: rgba(35, 35, 35, .67);
+    width: 50%;
+}
+
+.text {
+    font-size: 1vw;
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 5%;
+    background-color: rgba(35, 35, 35, .67);
+    width: 45%;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #868686;
+    text-decoration: none;
+}
+
+.right {
+    position: relative;
+    left: 0%;
+}
+
+@media only screen and (max-width: 1000px) {
+    #rightslide {
+        width: 110%;
+        right: -55%;
+    }
+    .heading {
+        font-size: 4vw;
+    }
+    .subheading {
+        font-size: 2vw;
+    }
+    .text {
+        font-size: 1.5vw;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #rightslide {
+        width: 200%;
+        right: -100%;
+    }
+    .heading {
+        font-size: 8vw;
+    }
+    .subheading {
+        font-size: 6vw;
+    }
+    .text {
+        font-size: 3vw;
+    }
 }
