@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 
 .hide {
-    visibility: hidden;
+
 }
 
 #canvas {
@@ -307,4 +307,41 @@ a:hover {
 }
 .portfolio-image:hover {
     transform: scale(1.05);
+}
+
+#finalslide {
+    width: 40%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    width: 66%;
+    margin-left: -33%;
+    left: 50%;
+    height: 44%;
+    margin-top: -22%;
+    top: 50%;
+    background-color: rgba(35, 35, 35, 0.67);
+}
+
+#finaltext {
+    font-size: 5vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+#links {
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.bottom {
+    height: 60px;
+    width: 60px;
+    left: 60px;
+    position: relative;
 }

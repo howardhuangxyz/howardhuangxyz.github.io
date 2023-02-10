@@ -92,10 +92,11 @@ var scrollBar = document.getElementById("progressBar");
 var topTab = document.getElementsByClassName("top-tab");
 var nameslide = document.getElementById("nameslide");
 var name = document.getElementById("name");
-var logos = document.getElementsByClassName("logo");
+var logos = document.getElementsByClassName("logo-holder");
 var arrows = document.getElementsByClassName("arrows");
 var right = document.getElementsByClassName("right");
 var left = document.getElementsByClassName("left");
+var finalslide = document.getElementById("finalslide");
 function handleScrollElements() {
     scrollBar.style.width = scrollY + "%";
     if (scrollY > 7) {
@@ -212,6 +213,17 @@ function handleScrollElements() {
         for (var x = 0; x < left.length; x++) {
             left[x].style.left = "0%";
         }
+    }
+    
+    if (scrollY < 68) {
+        finalslide.style.opacity = "0";
+        finalslide.style.transform = "scale(0.6)"
+    } else if (scrollY < 79) {
+        finalslide.style.opacity = (scrollY - 68) / 11;
+        finalslide.style.transform = "scale(" + (0.6 + 0.5 * (scrollY - 68) / 11) + ")"
+    } else {
+        finalslide.style.opacity = "1";
+        finalslide.style.transform = "scale(1.1)"
     }
 }
 
