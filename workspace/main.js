@@ -88,12 +88,16 @@ window.addEventListener('scroll', () => {
     handleScrollElements();
 })
 
+var scrollBar = document.getElementById("progressBar");
+var topTab = document.getElementsByClassName("top-tab");
 var nameslide = document.getElementById("nameslide");
 var name = document.getElementById("name");
 var logos = document.getElementsByClassName("logo");
 var arrows = document.getElementsByClassName("arrows");
 var right = document.getElementsByClassName("right");
+var left = document.getElementsByClassName("left");
 function handleScrollElements() {
+    scrollBar.style.width = scrollY + "%";
     if (scrollY > 7) {
         for (var x = 0; x < arrows.length; x++) {
             arrows[x].style.visibility = "hidden";
@@ -104,6 +108,9 @@ function handleScrollElements() {
         }
     }
     if (scrollY < 4) {
+        for (var x = 0; x < topTab.length; x++) {
+            topTab[x].style.opacity = 0;
+        }
         for (var x = 0; x < logos.length; x++) {
             logos[x].style.opacity = 1;
         }
@@ -115,6 +122,9 @@ function handleScrollElements() {
         name.style.fontSize = "7vw";
         name.style.marginTop = "20px";
     } else if (scrollY < 12) {
+        for (var x = 0; x < topTab.length; x++) {
+            topTab[x].style.opacity = (scrollY - 4) / 8;
+        }
         for (var x = 0; x < logos.length; x++) {
             logos[x].style.opacity = 1 - (scrollY - 4) / 8;
         }
@@ -126,6 +136,9 @@ function handleScrollElements() {
         name.style.fontSize = (7 - 4 * (scrollY - 4) / 8) + "vw";
         name.style.marginTop = (20 - 10 * (scrollY - 4) / 8) + "px";
     } else {
+        for (var x = 0; x < topTab.length; x++) {
+            topTab[x].style.opacity = 1;
+        }
         for (var x = 0; x < logos.length; x++) {
             logos[x].style.opacity = 0;
         }
@@ -166,6 +179,38 @@ function handleScrollElements() {
     } else {
         for (var x = 0; x < right.length; x++) {
             right[x].style.left = "50%";
+        }
+    }
+
+    if (scrollY < 50) {
+        for (var x = 0; x < left.length; x++) {
+            left[x].style.left = "0%";
+        }
+    } else if (scrollY < 65) {
+        for (var x = 0; x < left.length; x++) {
+            if (scrollY - 50 < 5) {
+                if (scrollY - 50 < x / 4) {
+                    left[x].style.left = "0%";
+                } else if (scrollY - 50 < 2 + x / 4) {
+                    left[x].style.left = (25 * (scrollY - 50 - (x / 4))) + "%";
+                } else {
+                    left[x].style.left = "50%";
+                }
+            } else if (scrollY - 50 < 10){
+                left[x].style.left = "50%";
+            } else {
+                if (scrollY - 50 < x / 4 + 10) {
+                    left[x].style.left = "50%";
+                } else if (scrollY - 50 < 2 + x / 4 + 10) {
+                    left[x].style.left = (50 - 50 * (scrollY - 60 - (x / 4))) + "%";
+                } else {
+                    left[x].style.left = "0%";
+                }
+            }
+        }
+    } else {
+        for (var x = 0; x < left.length; x++) {
+            left[x].style.left = "0%";
         }
     }
 }

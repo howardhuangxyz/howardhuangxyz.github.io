@@ -11,6 +11,9 @@
 <body>
     <span id="scrollProgress" class="hide"></span>
     <canvas id="canvas"></canvas>
+    <div class="progressContainer">
+        <span id="progressBar"></span>
+    </div>
     <div class="slide" id="nameslide">
         <h3 id="name">Howard Huang</h3>
         <div class="logo-holder">
@@ -28,6 +31,8 @@
             </a>
         </div>
     </div>
+    <div class="top-tab" id="middle-tab"><a href="#edu-exp">Education/Experience</a></div>
+    <div class="top-tab" id="right-tab"><a href="#skills-portfolio">Skills/Portfolio</a></div>
     <svg class="arrows">
         <path class="a1" d="M0 0 L30 32 L60 0"></path>
         <path class="a2" d="M0 20 L30 52 L60 20"></path>
@@ -58,20 +63,27 @@
             Cooking Around the World Club, Spanish Club
         </div>
         <div class="right heading">Experience</div>
-        <div class="right subheading">BAM.Money (Business Technology Researcher)</div>
+        <div class="right subheading">BAM.Money (Cofounder/Business Technologist)</div>
         <div class="right text">Worked directly with Cofounder to roll out new Marketplace for illiquid assets.
             Tested platform for bugs and fixed them, advising on DLT and blockchain applications. 
             Led distribution and gamification efforts. Revamped website frontend.
           </div>
-        <div class="right subheading">Broad Institute (Reasearch Intern)</div>
+        <div class="right subheading">Broad Institute of MIT and Harvard (Research Intern)</div>
         <div class="right text" style="padding-bottom: 10px">  Studied mouse models using Computational Biology (Downstream Data Analysis).
             Interpreted scRNA-seq datasets, R, and Python to study gastroenterology (IBD).
           </div>
     </div>
-    <!--<div class="slide" id="leftslide">
-        <div class="heading">Skills</div>
-        <div class="heading">Portfolio</div>
-    </div>-->
+    <div class="slide" id="leftslide">
+        <div class="left heading">Skills</div>
+        <div class="left subheading">Programming Languages/Frameworks</div>
+        <div class="left text">Python, C++, HTML/CSS/JS, Java, R, ReactJS</div>
+        <div class="left subheading">Languages</div>
+        <div class="left text">English (Native), Chinese (Native), Spanish (Proficient)</div>
+        <div class="left heading">Portfolio</div>
+        <div class="left subheading">Personal Website <a href="https://howardhuang.xyz">howardhuang.xyz</a></div>
+        <div class="left text">HTML, CSS, Javascript, ThreeJS, Vite (<a href="https://github.com/howardhuangxyz/howardhuangxyz.github.io">gh-repo</a>)</div>
+        <div class="left text" style="padding-bottom: 10px"><a href="https://howardhuang.xyz"><img src="./images/personalwebsite.png" alt="" class="portfolio-image"/></a></div>
+    </div>
     <div class="slide finalslide"></div>
     <div class="page hide">
         <h1>PAGE 1</h1>
@@ -79,14 +91,17 @@
     <div class="page hide">
         <h1>PAGE 2</h1>
     </div>
-    <div class="page hide">
+    <div class="page hide" id="edu-exp">
         <h1>PAGE 3</h1>
     </div>
-    <div class="page hide">
-        <h1>PAGE 4</h1>
+    <div class="page half hide">
+        <h1>PAGE 4.0</h1>
     </div>
-    <div class="page hide">
-        <h1>PAGE 5</h1>
+    <div class="page hide" id="skills-portfolio">
+        <h1>PAGE 4.5</h1>
+    </div>
+    <div class="page half hide">
+        <h1>PAGE 5.5</h1>
     </div>
     <div class="page hide">
         <h1>PAGE 6</h1>
