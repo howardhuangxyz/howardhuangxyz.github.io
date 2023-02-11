@@ -268,7 +268,7 @@ a:hover {
 
     #leftslide {
         width: 110%;
-        right: -55%;
+        left: -55%;
     }
 
     .heading {
@@ -289,7 +289,7 @@ a:hover {
     }
     #leftslide {
         width: 200%;
-        right: -100%;
+        left: -100%;
     }
     .heading {
         font-size: 8vw;
@@ -344,4 +344,15 @@ a:hover {
     width: 60px;
     left: 60px;
     position: relative;
+}
+
+@media only screen and (max-width: 750px) {
+    #links {
+        grid-template-columns: 1fr 1fr;
+    }
+    .bottom {
+        height: 40px;
+        width: 40px;
+        left: 40px;
+    }
 }

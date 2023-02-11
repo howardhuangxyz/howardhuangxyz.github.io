@@ -186,9 +186,11 @@ function handleScrollElements() {
     if (scrollY < 50) {
         for (var x = 0; x < left.length; x++) {
             left[x].style.left = "0%";
+            left[x].style.opacity = "0";
         }
     } else if (scrollY < 65) {
         for (var x = 0; x < left.length; x++) {
+            left[x].style.opacity = "1";
             if (scrollY - 50 < 5) {
                 if (scrollY - 50 < x / 4) {
                     left[x].style.left = "0%";
@@ -211,6 +213,7 @@ function handleScrollElements() {
         }
     } else {
         for (var x = 0; x < left.length; x++) {
+            left[x].style.opacity = "0";
             left[x].style.left = "0%";
         }
     }
